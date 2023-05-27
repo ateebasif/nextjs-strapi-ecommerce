@@ -5,7 +5,9 @@
       "@/*": ["./src/*"],
       "@/components/*": ["components/*"],
       "@/services/*": ["services/*"],
-      "@/styles/*": ["styles/*"]
+      "@/styles/*": ["styles/*"],
+      "@/apiServices/*": ["apiServices/*"],
+      "@/utils/*": ["utils/*"],
     },
     "allowJs": true,
     "checkJs": true,
