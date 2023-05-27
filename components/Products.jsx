@@ -43,7 +43,7 @@ const Products = (props) => {
                     {product?.attributes?.productDescription}
                   </p>
 
-                  <Link href={product.attributes?.slug}>
+                  <Link href={`/product/${product.attributes?.slug}`}>
                     <button className="my-2 rounded border-0 bg-indigo-500 px-4 py-2 text-white hover:bg-indigo-600 focus:outline-none">
                       But Now
                     </button>

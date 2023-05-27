@@ -1,7 +1,9 @@
 import Link from "next/link";
 import React from "react";
 
-const Header = () => {
+const Header = (props) => {
+  const { cart } = props;
+
   return (
     <header className="body-font text-gray-600">
       <div className="container mx-auto flex flex-col flex-wrap items-center py-5 md:flex-row">
@@ -35,6 +37,9 @@ const Header = () => {
           </Link>
           <Link href="/contact" className="mr-5 hover:text-gray-900">
             Contact
+          </Link>
+          <Link href="/contact" className="mr-5 hover:text-gray-900">
+            Cart({cart.length})
           </Link>
         </nav>
         <button className="my-2 rounded border-0 bg-indigo-500 px-4 py-2 text-white hover:bg-indigo-600 focus:outline-none">
