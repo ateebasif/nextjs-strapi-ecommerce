@@ -2,7 +2,17 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
-    }
-  }
+      "@/*": ["./src/*"],
+      "@/components/*": ["components/*"],
+      "@/services/*": ["services/*"],
+      "@/styles/*": ["styles/*"]
+    },
+    "allowJs": true,
+    "checkJs": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "jsx": "preserve"
+  },
+  "include": ["next-env.d.js", "**/*.js", "**/*.jsx"]
 }
