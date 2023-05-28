@@ -1,5 +1,5 @@
-import Link from "next/link";
 import React from "react";
+import Link from "next/link";
 
 const Header = (props) => {
   const { cart } = props;
@@ -38,7 +38,7 @@ const Header = (props) => {
           <Link href="/contact" className="mr-5 hover:text-gray-900">
             Contact
           </Link>
-          <Link href="/contact" className="mr-5 hover:text-gray-900">
+          <Link href="/checkout" className="mr-5 hover:text-gray-900">
             Cart({cart.length})
           </Link>
         </nav>

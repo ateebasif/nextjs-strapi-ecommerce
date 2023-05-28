@@ -2,9 +2,13 @@ import React from "react";
 import qs from "qs";
 
 import { fetchProduct } from "@/apiServices/index";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 const Slug = (props) => {
   const { product, addToCart } = props;
+  const router = useRouter();
+  const { slug } = router.query;
 
   console.log("product", product);
 
@@ -16,7 +20,8 @@ const Slug = (props) => {
             <img
               alt="ecommerce"
               className="h-64 w-full rounded object-cover object-center lg:h-auto lg:w-1/2"
-              src="https://dummyimage.com/400x400"
+              // src="https://dummyimage.com/400x400"
+              src={`http://localhost:1337${product?.attributes?.image?.data?.attributes?.url}`}
             />
             <div className="mt-6 w-full lg:mt-0 lg:w-1/2 lg:py-6 lg:pl-10">
               <h2 className="title-font text-sm tracking-widest text-gray-500">
@@ -75,14 +80,16 @@ const Slug = (props) => {
                 </span>
                 <div className="ml-2 flex">
                   <button
-                    onClick={() => addToCart(product, 1)}
+                    onClick={() => addToCart(slug, 1, product.attributes.price)}
                     className="ml-auto flex rounded border-0 bg-indigo-500 px-2 py-2 text-white hover:bg-indigo-600 focus:outline-none"
                   >
                     Add to Cart
                   </button>
-                  <button className="ml-2 flex rounded border-0 bg-indigo-500 px-2 py-2 text-white hover:bg-indigo-600 focus:outline-none">
-                    Checkout
-                  </button>
+                  <Link href="/checkout">
+                    <button className="ml-2 flex rounded border-0 bg-indigo-500 px-2 py-2 text-white hover:bg-indigo-600 focus:outline-none">
+                      Checkout
+                    </button>
+                  </Link>
                 </div>
                 <button className="ml-4 inline-flex h-10 w-10 items-center justify-center rounded-full border-0 bg-gray-200 p-0 text-gray-500">
                   <svg
@@ -109,6 +116,7 @@ export default Slug;
 
 export const getServerSideProps = async ({ query }) => {
   const queryObj = {
+    populate: "*",
     filters: {
       slug: {
         $eq: query.slug,

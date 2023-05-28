@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 import "@/styles/globals.css";
 
@@ -18,7 +19,7 @@ export default function App({ Component, pageProps }) {
     for (let index = 0; index < qty; index++) {
       newCart.push([item, price]);
     }
-    console.log("Add to cart", newCart);
+    console.log("Add to cartt", newCart);
     setCart(newCart);
     setReloadKey(Math.random());
   };
@@ -46,6 +47,7 @@ export default function App({ Component, pageProps }) {
           {...pageProps}
         />
       </main>
+      <Footer />
     </>
   );
 }
