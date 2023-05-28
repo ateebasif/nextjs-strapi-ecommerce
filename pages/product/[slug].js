@@ -19,7 +19,7 @@ const Slug = (props) => {
           <div className="mx-auto flex flex-wrap lg:w-4/5">
             <img
               alt="ecommerce"
-              className="h-64 w-full rounded object-cover object-center lg:h-auto lg:w-1/2"
+              className="h-64 w-full rounded object-center md:object-cover lg:h-auto lg:w-1/2"
               // src="https://dummyimage.com/400x400"
               src={`http://localhost:1337${product?.attributes?.image?.data?.attributes?.url}`}
             />

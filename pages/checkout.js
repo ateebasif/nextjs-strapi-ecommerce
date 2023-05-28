@@ -1,7 +1,64 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+
+import { createOrder } from "@/apiServices/index";
 
 const Checkout = (props) => {
-  const { handleChange, cart, subtotal, form ,submit} = props;
+  const { cart } = props;
+  const [subtotal, setSubtotal] = useState(0);
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    address: "",
+    phone: "",
+  });
+
+  useEffect(() => {
+    let myTotal = 0;
+    for (let index = 0; index < cart.length; index++) {
+      const element = cart[index];
+      myTotal = myTotal + cart[index][1];
+    }
+    setSubtotal(myTotal);
+  }, []);
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+    console.log({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const submit = async (e) => {
+    e.preventDefault();
+    let orderId = "OID" + Math.floor(1000000 * Math.random());
+    //  let url = `${process.env.NEXT_PUBLIC_STRAPI_URL} + "/api/orders/pretransaction`;
+    // let url = `http://localhost:1337/api/orders/pretransaction`;
+    // const rawResponse = await fetch(url, {
+    //   method: "POST",
+    //   body: JSON.stringify({
+    //     orderid: orderId,
+    //     amount: subtotal,
+    //     ...form,
+    //     cart: cart,
+    //   }),
+    // });
+    // const content = await rawResponse.json();
+
+    const data = {
+      orderid: orderId,
+      amount: subtotal,
+      ...form,
+      cart: cart,
+    };
+
+    try {
+      const res = await createOrder(data);
+      console.log("create order res", res);
+
+      // ! need to make a request here to update the order in db that will redirce the user and update order info
+      // ctx.redirect("http://localhost:1337/api/orders/posttransaction");
+    } catch (error) {
+      console.log("create order axios error", error);
+    }
+  };
 
   return (
     <div>
@@ -18,10 +75,10 @@ const Checkout = (props) => {
                 : `Your cart is empty!`}
             </div>
             <ul className="list-decimal px-8">
-              {cart.map((item) => {
+              {cart.map((item, index) => {
                 return (
-                  <li key={item.id}>
-                    Product {item[0]} with a price of ₹{item[1]}
+                  <li key={item[0] + index}>
+                    Product {item[0]} with a price of ${item[1]}
                   </li>
                 );
               })}
