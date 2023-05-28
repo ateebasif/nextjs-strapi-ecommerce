@@ -42,7 +42,6 @@ const Products = (props) => {
                   <p className="text-base leading-relaxed">
                     {product?.attributes?.productDescription.slice(0, 100)}
                   </p>
-                  <div className="hidden bg-blue-800 bg-green-800 bg-red-800"></div>
                   <Link href={`/product/${product.attributes?.slug}`}>
                     <button className="my-2 rounded border-0 bg-indigo-500 px-4 py-2 text-white hover:bg-indigo-600 focus:outline-none">
                       But Now
